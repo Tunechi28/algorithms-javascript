@@ -7,8 +7,6 @@
   The outer loop goes over the whole list, the index of which signifies where the "sorted" part of the list is. The inner
   loop goes over the sorted part of the list and inserts it into the correct position in the array.
   
-  Like bubble sort, there's a visualization mechanism available to you. Just call snapshot(myArray) at the beginning of
-  your inner loop and it should handle the rest for you!
   
   And you put xdescribe instead of describe if you want to suspend running the unit tests.  
 */
@@ -23,10 +21,11 @@ function insertionSort(nums) {
       j--;
     }
   }
-
 }
 
-tmp =5
+
+
+
 function insertionSort2 (nums) {
   for (let i =1; i< nums.length; i++) {
     let j;
