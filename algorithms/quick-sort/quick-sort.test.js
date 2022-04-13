@@ -13,12 +13,30 @@
 */
 
 function quickSort(nums) {
-  // code goes here
+  //base case, array with 0 or 1 elements is already sorted
+  if(nums.length <= 1) {
+    return nums;
+  }
+
+  //choose pivot
+  const pivot = nums.pop();
+
+  //separate array into two lists, one with elements less than pivot, one with elements greater than pivot
+  const less = nums.filter(num => num <= pivot);
+  const greater = nums.filter(num => num > pivot);
+
+  //recursively call quickSort on both lists
+  const sortedLess = quickSort(less);
+  const sortedGreater = quickSort(greater);
+
+  //concatenate the two lists and return
+  return sortedLess.concat(pivot, sortedGreater);
+
 }
 
 // unit tests
 // do not modify the below code
-test.skip("quickSort", function () {
+test("quickSort", function () {
   const input = [10, 8, 2, 1, 6, 3, 9, 4, 7, 5];
   const answer = quickSort(input);
 
