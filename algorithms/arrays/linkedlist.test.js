@@ -80,11 +80,13 @@ class LinkedList {
 }
 
 class Node {
-  constructor(value) {
+  constructor(value){
     this.value = value;
-    this.next = null;
+    this.next = null
   }
 }
+
+
 
 // unit tests
 // do not modify the below code
