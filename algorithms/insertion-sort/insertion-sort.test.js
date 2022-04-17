@@ -25,7 +25,6 @@ function insertionSort(nums) {
 
 
 
-
 function insertionSort2 (nums) {
   for (let i =1; i< nums.length; i++) {
     let j;

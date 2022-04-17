@@ -30,7 +30,8 @@ function quickSort(nums) {
   const sortedGreater = quickSort(greater);
 
   //concatenate the two lists and return
-  return sortedLess.concat(pivot, sortedGreater);
+  // return sortedLess.concat(pivot, sortedGreater);
+  return [...sortedLess, pivot, ...sortedGreater];
 
 }
 

@@ -9,13 +9,91 @@
 
 */
 
-function radixSort(array) {
-  // code goes here
+function radixSort(items, RADIX) {
+
+  // default radix is then because we usually count to base 10
+  if (RADIX === undefined || RADIX < 1) {
+    RADIX = 10
+  }
+
+  let maxLength = false
+  let placement = 1
+
+  while (!maxLength) {
+    maxLength = true
+    const buckets = []
+
+    for (let i = 0; i < RADIX; i++) {
+      buckets.push([])
+    }
+
+    for (let j = 0; j < items.length; j++) {
+      const tmp = items[j] / placement
+      console.log(tmp)
+      buckets[Math.floor(tmp % RADIX)].push(items[j])
+      if (maxLength && tmp > 0) {
+        maxLength = false
+      }
+    }
+
+    let a = 0
+    for (let b = 0; b < RADIX; b++) {
+      const buck = buckets[b]
+      for (let k = 0; k < buck.length; k++) {
+        items[a] = buck[k]
+        a++
+      }
+    }
+    placement *= RADIX
+  }
+  return items
+
+}
+
+
+//second implementation
+
+function getDigit(number, place, longestNumber) {
+  const string = number.toString();
+  const size = string.length;
+
+  const mod = longestNumber - size;
+  return string[place - mod] || 0;
+}
+
+function findLongestNumber(array) {
+  let longest = 0;
+  for (let i = 0; i < array.length; i++) {
+    const currentLength = array[i].toString().length;
+    longest = currentLength > longest ? currentLength : longest;
+  }
+  return longest;
+}
+
+function radixSort2(array) {
+  const longestNumber = findLongestNumber(array);
+
+  const buckets = new Array(10).fill().map(() => []); // make an array of 10 arrays
+
+  for (let i = longestNumber - 1; i >= 0; i--) {
+    while (array.length) {
+      const current = array.shift();
+      buckets[getDigit(current, i, longestNumber)].push(current);
+    }
+
+    for (let j = 0; j < 10; j++) {
+      while (buckets[j].length) {
+        array.push(buckets[j].shift());
+      }
+    }
+  }
+
+  return array;
 }
 
 // unit tests
 // do not modify the below code
-describe.skip("radix sort", function () {
+describe("radix sort", function () {
   it("should sort correctly", () => {
     const nums = [
       20,
